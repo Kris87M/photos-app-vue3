@@ -1,13 +1,36 @@
 <template>
-  <router-view />
+  <div id="app">
+    <div class="container p-p-4">
+      <app-header />
+      <main>
+        <router-view v-slot="{ Component }">
+          <SlideFadeAnimation>
+            <component :is="Component" :key="$route.fullPath" />
+          </SlideFadeAnimation>
+        </router-view>
+      </main>
+      <app-footer />
+    </div>
+  </div>
 </template>
 
 <script>
 import './styles/global.scss'
 import 'normalize.css'
 
+import AppHeader from './components/layout/theHeader.vue'
+import AppFooter from './components/layout/theFooter.vue'
+import { mapActions } from 'vuex'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: { AppHeader, AppFooter },
+  methods: {
+    ...mapActions(['fetchCategories'])
+  },
+  created () {
+    this.fetchCategories()
+  }
 }
 </script>
 
