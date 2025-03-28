@@ -1,7 +1,7 @@
 <template>
   <img
     :src="imageSrc"
-    class="image">
+    class="image h-25rem shadow-4">
 </template>
 
 <script>
@@ -25,6 +25,6 @@ export default {
 
 <style lang="scss">
 .image {
-  width: 100%;
+  object-fit: cover;
 }
 </style>
