@@ -20,11 +20,12 @@ import 'normalize.css'
 
 import AppHeader from './components/layout/theHeader.vue'
 import AppFooter from './components/layout/theFooter.vue'
+import SlideFadeAnimation from './components/layout/SlideFadeAnimation.vue'
 import { mapActions } from 'vuex'
 
 export default {
   name: 'App',
-  components: { AppHeader, AppFooter },
+  components: { AppHeader, AppFooter, SlideFadeAnimation },
   methods: {
     ...mapActions(['fetchCategories'])
   },
