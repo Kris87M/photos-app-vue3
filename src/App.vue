@@ -27,7 +27,7 @@ export default {
   name: 'App',
   components: { AppHeader, AppFooter, SlideFadeAnimation },
   methods: {
-    ...mapActions(['fetchCategories'])
+    ...mapActions('Categories', ['fetchCategories'])
   },
   created () {
     this.fetchCategories()

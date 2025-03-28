@@ -5,12 +5,12 @@
     </div>
     <div
       class="loader"
-      v-show="photosRequest.pending">
+      v-show="request.pending">
       <progress-spinner />
     </div>
     <div
       class="error"
-      v-show="photosRequest.error">
+      v-show="request.error">
       <Message severity="error" variant="outlined">Error! Cannot connect to server! Try again later!</Message>
     </div>
   </div>
@@ -34,17 +34,17 @@ export default {
     }
   },
   computed: {
-    ...mapState(['photos', 'photosRequest'])
+    ...mapState('Photos', ['photos', 'request'])
   },
   methods: {
-    ...mapActions(['addVote', 'fetchPhotos', 'fetchCategoryPhotos']),
+    ...mapActions('Photos', ['addVote', 'fetchPhotos', 'fetchCategory']),
     handleVote (id) {
       this.addVote(id)
     },
     async loadPhotos () {
       this.currentPage++
       if (!this.category) this.fetchPhotos(this.currentPage)
-      else this.fetchCategoryPhotos({ category: this.category, page: this.currentPage })
+      else this.fetchCategory({ category: this.category, page: this.currentPage })
     },
     handleScroll () {
       const elem = this.$refs.catalog
@@ -57,7 +57,7 @@ export default {
   },
   created () {
     if (!this.category) this.fetchPhotos(1)
-    else this.fetchCategoryPhotos({ category: this.category, page: 1 })
+    else this.fetchCategory({ category: this.category, page: 1 })
   },
   mounted () {
     this.prepareScroll()
