@@ -43,7 +43,8 @@ export default {
     },
     async loadPhotos () {
       this.currentPage++
-      this.fetchPhotos(this.currentPage)
+      if (!this.category) this.fetchPhotos(this.currentPage)
+      else this.fetchCategoryPhotos({ category: this.category, page: this.currentPage })
     },
     handleScroll () {
       const elem = this.$refs.catalog
