@@ -9,7 +9,10 @@
         </router-link> |
         <span class="text-sm font-normal">share your moments</span>
       </h3>
-      <Button label="Submit" icon="pi pi-plus" rounded raised/>
+      <router-link
+        to="/add-photo">
+        <Button label="Submit photo" icon="pi pi-plus" rounded raised/>
+      </router-link>
     </div>
     <categories-list class="m-4 pt-4 border-top-1 border-gray-500"/>
   </header>
