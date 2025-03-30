@@ -12,7 +12,11 @@
           </div>
       </div>
     </template>
-    <template #title>{{ title }}</template>
+    <template #title>
+      <router-link :to="getPhotoLink">
+        {{ title }}
+      </router-link>
+    </template>
     <template #subtitle>{{`by ${author}`}}</template>
     <template #footer>
         <div class="flex gap-4 mt-1">
@@ -37,8 +41,13 @@ export default {
     description: { type: String },
     src: { type: String },
     votes: { type: Number },
-    category: { type: String },
+    category: { type: String, default: null },
     id: { type: String }
+  },
+  computed: {
+    getPhotoLink () {
+      return this.category ? `/photos/${this.category}/${this.id}` : `/${this.id}`
+    }
   },
   methods: {
     onVoteClick () {
