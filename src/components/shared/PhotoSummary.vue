@@ -13,7 +13,7 @@
       </div>
     </template>
     <template #title>
-      <router-link :to="getPhotoLink">
+      <router-link :to="getPhotoLink" class="no-underline text-color hover:text-blue-700">
         {{ title }}
       </router-link>
     </template>
