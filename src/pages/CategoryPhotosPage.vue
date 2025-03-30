@@ -17,7 +17,6 @@ export default {
   components: { PageTitle, PhotosCatalog },
   computed: {
     category () {
-      console.log(this.$route.params.category)
       return this.$route.params.category
     },
     pageTitle () {
