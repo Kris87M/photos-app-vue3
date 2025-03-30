@@ -4,9 +4,10 @@
       <app-header />
       <main>
         <router-view v-slot="{ Component }">
-          <SlideFadeAnimation>
+          <SlideFadeAnimation v-if="!isModalRoute">
             <component :is="Component" :key="$route.fullPath" />
           </SlideFadeAnimation>
+          <component v-else :is="Component" :key="$route.fullPath" />
         </router-view>
       </main>
       <app-footer />
@@ -26,6 +27,11 @@ import { mapActions } from 'vuex'
 export default {
   name: 'App',
   components: { AppHeader, AppFooter, SlideFadeAnimation },
+  computed: {
+    isModalRoute () {
+      return this.$route.name === 'single-photo' || this.$route.name === 'category-single-photo'
+    }
+  },
   methods: {
     ...mapActions('Categories', ['fetchCategories'])
   },
