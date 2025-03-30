@@ -5,6 +5,7 @@ export default {
   namespaced: true,
   state: {
     photos: [],
+    singlePhoto: null,
     request: {
       pending: false,
       error: false,
@@ -37,6 +38,9 @@ export default {
       if (photo) {
         photo.votes++
       }
+    },
+    SET_SINGLE_PHOTO (state, photo) {
+      state.singlePhoto = photo
     }
   },
   actions: {
@@ -47,12 +51,23 @@ export default {
 
         commit('START_REQUEST')
         const res = await axios.get(url)
-        await new Promise((resolve, reject) => { setTimeout(resolve, 1000) })
+        await new Promise((resolve, reject) => { setTimeout(resolve, 500) })
         commit('END_REQUEST')
 
         if (res.data.length < 12) commit('TOGGLE_ALL_LOADED')
         if (page > 1) commit('ADD_PHOTOS', res.data)
         else commit('UPDATE_PHOTOS', res.data)
+      } catch (err) {
+        commit('ERROR_REQUEST')
+      }
+    },
+    async fetchSinglePhoto ({ commit }, id) {
+      try {
+        commit('START_REQUEST')
+        const res = await axios.get(`${apiUrl}/photos/id/${id}`)
+        console.log(res)
+        commit('SET_SINGLE_PHOTO', res.data)
+        commit('END_REQUEST')
       } catch (err) {
         commit('ERROR_REQUEST')
       }
