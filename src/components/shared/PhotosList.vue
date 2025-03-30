@@ -9,7 +9,7 @@
     :description="photo.description"
     :src="photo.src"
     :votes="photo.votes"
-    :category="photo.category"
+    :category="$route.path === '/' ? null : photo.category"
     :id="photo._id"
     @vote="onVote(photo._id)"
     />
