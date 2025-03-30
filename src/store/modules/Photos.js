@@ -51,7 +51,7 @@ export default {
 
         commit('START_REQUEST')
         const res = await axios.get(url)
-        await new Promise((resolve, reject) => { setTimeout(resolve, 500) })
+        await new Promise((resolve, reject) => { setTimeout(resolve, 250) })
         commit('END_REQUEST')
 
         if (res.data.length < 12) commit('TOGGLE_ALL_LOADED')
@@ -65,7 +65,7 @@ export default {
       try {
         commit('START_REQUEST')
         const res = await axios.get(`${apiUrl}/photos/id/${id}`)
-        console.log(res)
+        console.log(res.data)
         commit('SET_SINGLE_PHOTO', res.data)
         commit('END_REQUEST')
       } catch (err) {
