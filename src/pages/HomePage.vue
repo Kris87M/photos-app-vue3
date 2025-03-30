@@ -4,6 +4,7 @@
       <p class="text-left ml-4">Photos</p>
     </page-title>
     <photos-catalog />
+    <router-view />
   </h1>
 </template>
 

@@ -4,6 +4,7 @@
       <p class="text-left ml-4">{{pageTitle}}</p>
     </page-title>
     <photos-catalog :category="this.category"/>
+    <router-view />
   </h1>
 </template>
 
