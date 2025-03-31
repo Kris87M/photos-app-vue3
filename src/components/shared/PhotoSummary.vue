@@ -27,34 +27,31 @@
 
 </template>
 
-<script>
+<script setup>
+import { computed, defineProps, defineEmits } from 'vue'
 import Button from 'primevue/button'
 import Card from 'primevue/card'
 import ImageItem from '../layout/ImageItem.vue'
 
-export default {
-  name: 'PhotoSummary',
-  components: { Button, Card, ImageItem },
-  props: {
-    title: { type: String },
-    author: { type: String },
-    description: { type: String },
-    src: { type: String },
-    votes: { type: Number },
-    category: { type: String, default: null },
-    id: { type: String }
-  },
-  computed: {
-    getPhotoLink () {
-      return this.category ? `/photos/${this.category}/${this.id}` : `/${this.id}`
-    }
-  },
-  methods: {
-    onVoteClick () {
-      this.$emit('vote', this.id)
-    }
-  }
+const props = defineProps({
+  title: String,
+  author: String,
+  description: String,
+  src: String,
+  votes: Number,
+  category: { type: String, default: null },
+  id: String
+})
+
+const emit = defineEmits(['vote'])
+
+const onVoteClick = () => {
+  emit('vote', props.id)
 }
+
+const getPhotoLink = computed(() =>
+  props.category ? `/photos/${props.category}/${props.id}` : `/${props.id}`
+)
 </script>
 
 <style scoped>
