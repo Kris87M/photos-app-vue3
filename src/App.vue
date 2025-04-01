@@ -3,7 +3,7 @@
     <div class="container p-p-4">
       <app-header />
       <main>
-        <router-view v-slot="{ Component }">
+        <router-view :key="$route.fullPath" v-slot="{ Component }">
           <SlideFadeAnimation v-if="!isModalRoute">
             <component :is="Component" :key="$route.fullPath" />
           </SlideFadeAnimation>
